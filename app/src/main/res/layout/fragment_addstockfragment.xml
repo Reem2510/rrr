@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Addstockfragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="429dp"
+        android:layout_height="match_parent">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            app:cardCornerRadius="30dp"
+            app:cardElevation="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+        </androidx.cardview.widget.CardView>
+
+        <LinearLayout
+            android:layout_width="418dp"
+            android:layout_height="454dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginEnd="13dp"
+            android:layout_marginBottom="18dp"
+            android:background="@drawable/shapeb"
+            android:orientation="vertical"
+            android:padding="20dp"
+            app:layout_constraintBottom_toTopOf="@+id/Addbt"
+            app:layout_constraintEnd_toEndOf="parent">
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+
+                <EditText
+                    android:id="@+id/named"
+                    android:layout_width="275dp"
+                    android:layout_height="48dp"
+                    android:layout_marginStart="52dp"
+                    android:layout_marginTop="308dp"
+                    android:layout_marginEnd="45dp"
+                    android:background="@drawable/shapebb"
+                    android:ems="10"
+                    android:hint="Stockname"
+                    android:inputType="textPersonName"
+                    android:minHeight="48dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <EditText
+                    android:id="@+id/descriptiond"
+                    android:layout_width="275dp"
+                    android:layout_height="48dp"
+                    android:layout_marginEnd="45dp"
+                    android:layout_marginBottom="30dp"
+                    android:background="@drawable/shapebb"
+                    android:ems="10"
+                    android:hint="description"
+                    android:inputType="textPersonName"
+                    android:minHeight="48dp"
+                    app:layout_constraintBottom_toTopOf="@+id/valued"
+                    app:layout_constraintEnd_toEndOf="parent" />
+
+                <EditText
+                    android:id="@+id/valued"
+                    android:layout_width="275dp"
+                    android:layout_height="48dp"
+                    android:layout_marginEnd="45dp"
+                    android:layout_marginBottom="30dp"
+                    android:background="@drawable/shapebb"
+                    android:ems="10"
+                    android:hint="value"
+                    android:inputType="phone"
+                    android:minHeight="48dp"
+                    app:layout_constraintBottom_toTopOf="@+id/named"
+                    app:layout_constraintEnd_toEndOf="parent" />
+
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="155dp"
+                    android:layout_height="166dp"
+                    android:layout_marginEnd="118dp"
+                    android:layout_marginBottom="2dp"
+                    android:src="@drawable/baseline_add_24"
+                    app:layout_constraintBottom_toTopOf="@+id/descriptiond"
+                    app:layout_constraintEnd_toEndOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/Addbt"
+            android:layout_width="104dp"
+            android:layout_height="69dp"
+            android:layout_marginEnd="181dp"
+            android:layout_marginBottom="149dp"
+            android:backgroundTint="@color/green"
+            android:hint="Add"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</FrameLayout>
