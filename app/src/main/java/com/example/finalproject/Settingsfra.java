@@ -59,6 +59,7 @@ public class Settingsfra extends Fragment {
     private Cadapter currencyRVAdapter;
     private ProgressBar loadingPB;
     private Context context;
+    private  StoksCallback scallback;
   private FirebaseFirestore db ;
   private   CollectionReference stocksRef;
 
@@ -115,7 +116,8 @@ public class Settingsfra extends Fragment {
         stocksModalArrayList = new ArrayList<>();
         db = FirebaseFirestore.getInstance();
         CollectionReference stocksRef = db.collection("stocks");
-        currencyRVAdapter = new Cadapter(stocksModalArrayList,this)
+        currencyRVAdapter = new Cadapter(stocksModalArrayList,context);
+
         getData();
         searchEdt.addTextChangedListener(new TextWatcher() {
             @Override
@@ -133,13 +135,20 @@ public class Settingsfra extends Fragment {
                 filter(s.toString());
             }
         });
+       scallback = new StoksCallback() {
+           @Override
+           public void onCallback(List<Stock> stocksList) {
+
+              // shifts = prepareShiftsListOrder(users);
+             //  setShiftsUsersAdpater();
+           }
+       };
+
 
     }
-    private void filter(String toString) {
+    private void filter(String filter) {
         ArrayList<Stock> filterlist = new ArrayList<>();
         for (Stock item : stocksModalArrayList) {
-            // on below line we are getting the item which are
-            // filtered and adding it to filtered list.
             if (item.getStockName().toLowerCase().contains(filter.toLowerCase())) {
                 filterlist.add(item);
             }
@@ -155,22 +164,26 @@ public class Settingsfra extends Fragment {
 
     private void getData() {
 
-        db.collection("Stocks")
+       Stocks.clear();
+       fbs.getFire().collection("stocks")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                List<DocumentSnapshot> documents = task.getResult().getDocuments();
-                               // mAdapter.updateData(documents);
+                                Stock stock = document.toObject(Stock.class);
+                                if (fbs.getCompany().getUsers().contains(stock.getUsername()))
+                                  users.add(document.toObject(User.class));
                             }
+
+                            ucall.onCallback(users);
                         } else {
-                            Log.w(TAG, "Error getting documents.", task.getException());
+                            Log.e("AllRestActivity: readData()", "Error getting documents.", task.getException());
                         }
                     }
                 });
-       // currencyRV.setAdapter(mAdapter);
+
 
 
     }

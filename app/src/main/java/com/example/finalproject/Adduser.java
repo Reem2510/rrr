@@ -20,13 +20,19 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.auth.User;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -38,6 +44,7 @@ public class Adduser extends Fragment {
     private EditText Address,Phone,editUsername,Fullname;
     private Button Addbus,Edit;
     private FirebaseFirestore db;
+    private DatabaseReference reference;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -86,28 +93,53 @@ public class Adduser extends Fragment {
         Addbus=getActivity().findViewById(R.id.Addbus);
         Edit=getActivity().findViewById(R.id.Edit);
         db = FirebaseFirestore.getInstance();
+      reference = FirebaseDatabase.getInstance().getReference("users");
+        String name ,adress ,PHONE;
 
 
     }
-    private void AddtoFireBseStore() {
-        String fullname, Username, userPhone, userAddress;
-        fullname = Fullname.getText().toString();
-        Username = editUsername.getText().toString();
-        userPhone = Phone.getText().toString();
-        userAddress = Address.getText().toString();
+    private void FireBseStore() {
+        db.collection("users")
+                .document("user123")
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        if (documentSnapshot.exists()) {
+                            String name = documentSnapshot.getString("name");
+                            String adress= documentSnapshot.getString("adress");
+                            String PHONE = documentSnapshot.getString("phone");
+                        }
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        // Handle errors here
+                    }
+                });
+        Fullname.getEditText().setText();
+        email.getEditText().setText(user_email);
+        phoneNo.getEditText().setText(user_phoneNo);
     }
-
-
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public void onStart() {
+        super.onStart();
         attachComponents();
         Addbus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
+
             }
         });
+
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+
         return inflater.inflate(R.layout.fragment_adduser, container, false);
     }
 }
