@@ -17,43 +17,38 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Cadapter extends RecyclerView.Adapter<Cadapter.CurrencyViewholder> {
-    private static DecimalFormat df2 = new DecimalFormat("#.##");
     private ArrayList<Stock> StocksModals;
     private List<DocumentSnapshot> mData;
     private Context context;
     private AdapterView.OnItemClickListener mListener;
 
-    public Cadapter(ArrayList<Stock> StocksModals, Context context) {
+    public Cadapter( Context context, ArrayList<Stock> StocksModals) {
         this.StocksModals = StocksModals;
         this.context = context;
     }
 
 
-    public Cadapter(List<DocumentSnapshot> data, AdapterView.OnItemClickListener listener) {
+    /*public Cadapter(List<DocumentSnapshot> data, AdapterView.OnItemClickListener listener) {
         mData = data;
         mListener = listener;
-    }
+    } */
     public void updateData(List<DocumentSnapshot> documents) {
         mData = documents;
         notifyDataSetChanged();
     }
-    @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+    /*@Override
+    public void onBindViewHolder( int position) {
         DocumentSnapshot document = mData.get(position);
         String name = document.getString("name");
         String description = document.getString("description");
-        holder.mNameTextView.setText(name);
-        holder.mDescriptionTextView.setText(description);
-    }
 
-    // below is the method to filter our list.
+    } */
+
     public void filterList(ArrayList<Stock> filterlist) {
-        // adding filtered list to our
-        // array list and notifying data set changed
+
         StocksModals = filterlist;
         notifyDataSetChanged();
     }
-
     @NonNull
     @Override
     public Cadapter.CurrencyViewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -61,11 +56,8 @@ public class Cadapter extends RecyclerView.Adapter<Cadapter.CurrencyViewholder> 
         View view = LayoutInflater.from(context).inflate(R.layout.currencyitem, parent, false);
         return new Cadapter.CurrencyViewholder(view);
     }
-
     @Override
     public void onBindViewHolder(@NonNull Cadapter.CurrencyViewholder holder, int position) {
-        // on below line we are setting data to our item of
-        // recycler view and all its views.
        Stock modal = StocksModals.get(position);
         holder.nameTV.setText(modal.getStockName());
         holder.rateTV.setText(modal.getValue());
@@ -74,13 +66,10 @@ public class Cadapter extends RecyclerView.Adapter<Cadapter.CurrencyViewholder> 
 
     @Override
     public int getItemCount() {
-        // on below line we are returning
-        // the size of our array list.
+
         return StocksModals.size();
     }
 
-    // on below line we are creating our view holder class
-    // which will be used to initialize each view of our layout file.
     public class CurrencyViewholder extends RecyclerView.ViewHolder {
         private TextView symbolTV, rateTV, nameTV,descriptionTV;
 

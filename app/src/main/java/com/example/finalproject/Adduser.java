@@ -118,9 +118,6 @@ public class Adduser extends Fragment {
                         // Handle errors here
                     }
                 });
-        Fullname.getEditText().setText();
-        email.getEditText().setText(user_email);
-        phoneNo.getEditText().setText(user_phoneNo);
     }
     @Override
     public void onStart() {

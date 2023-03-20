@@ -56,10 +56,11 @@ public class Settingsfra extends Fragment {
     private RecyclerView currencyRV;
     private EditText searchEdt;
     private ArrayList<Stock> stocksModalArrayList;
-    private Cadapter currencyRVAdapter;
-    private ProgressBar loadingPB;
+    private Cadapter RVAdapter;
+
+    private StocksCallback ustock;
     private Context context;
-    private  StoksCallback scallback;
+
   private FirebaseFirestore db ;
   private   CollectionReference stocksRef;
 
@@ -75,7 +76,7 @@ public class Settingsfra extends Fragment {
 
 
     public Settingsfra() {
-        // Required empty public constructor
+
     }
 
     /**
@@ -106,17 +107,19 @@ public class Settingsfra extends Fragment {
         }
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        attachComponents();
+    }
+
     private void attachComponents() {
         searchEdt =getActivity().findViewById(R.id.idEdtCurrency);
-        loadingPB = getActivity().findViewById(R.id.idPBLoading);
-        currencyRV =getActivity().findViewById(R.id.idRVcurrency);
+        currencyRV =getActivity().findViewById(R.id.idRVSS);
         LinearLayoutManager layoutManager = new LinearLayoutManager(context);
         currencyRV.setLayoutManager(layoutManager);
-        currencyRV.setAdapter(currencyRVAdapter);
         stocksModalArrayList = new ArrayList<>();
         db = FirebaseFirestore.getInstance();
-        CollectionReference stocksRef = db.collection("stocks");
-        currencyRVAdapter = new Cadapter(stocksModalArrayList,context);
 
         getData();
         searchEdt.addTextChangedListener(new TextWatcher() {
@@ -132,18 +135,9 @@ public class Settingsfra extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                filter(s.toString());
+                //filter(s.toString());
             }
         });
-       scallback = new StoksCallback() {
-           @Override
-           public void onCallback(List<Stock> stocksList) {
-
-              // shifts = prepareShiftsListOrder(users);
-             //  setShiftsUsersAdpater();
-           }
-       };
-
 
     }
     private void filter(String filter) {
@@ -156,16 +150,23 @@ public class Settingsfra extends Fragment {
         if (filterlist.isEmpty()) {
             Toast.makeText(getContext(), "No Stocks found..", Toast.LENGTH_SHORT).show();
         } else {
-            // on below line we are calling a filter
-            // list method to filter our list.
-            currencyRVAdapter.filterList(filterlist);
+            // TODO: currencyRVAdapter.filterList(filterlist);
         }
+
+        ustock = new StocksCallback() {
+            @Override
+            public void onCallback(ArrayList<Stock> stocksList) {
+                Cadapter ca = new Cadapter(getContext(), stocksList);
+                currencyRV.setAdapter(ca);
+            }
+
+        };
     }
 
     private void getData() {
 
-       Stocks.clear();
-       fbs.getFire().collection("stocks")
+        stocksModalArrayList.clear();
+        db.collection("stocks")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -173,15 +174,15 @@ public class Settingsfra extends Fragment {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 Stock stock = document.toObject(Stock.class);
-                                if (fbs.getCompany().getUsers().contains(stock.getUsername()))
-                                  users.add(document.toObject(User.class));
+                                stocksModalArrayList.add(stock);
                             }
 
-                            ucall.onCallback(users);
+                            ustock.onCallback(stocksModalArrayList);
                         } else {
-                            Log.e("AllRestActivity: readData()", "Error getting documents.", task.getException());
+                            //Log.e("AllRestActivity: readData()", "Error getting documents.", task.getException());
                         }
                     }
+
                 });
 
 

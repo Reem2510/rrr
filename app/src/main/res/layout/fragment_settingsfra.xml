@@ -20,28 +20,24 @@
             android:hint="Search Stock"
             android:textColor="@color/white"
             android:textColorHint="@color/white"
-            app:layout_constraintBottom_toTopOf="@+id/idRVcurrency"
-            app:layout_constraintEnd_toStartOf="@+id/idRVcurrency" />
+            app:layout_constraintBottom_toTopOf="@+id/idRVSS"
+            app:layout_constraintEnd_toStartOf="@+id/idRVSS" />
 
-        <!--recycler view for displaying the list of currencies-->
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/idRVcurrency"
+            android:id="@+id/idRVSS"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@id/idEdtCurrency"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             tools:listitem="@layout/currencyitem" />
 
-        <!--progress bar for loading indicator-->
-        <ProgressBar
-            android:id="@+id/idPBLoading"
+        <SearchView
+            android:id="@+id/simpleSearchView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:layout_marginEnd="616dp"
-            android:layout_marginBottom="720dp"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            tools:layout_editor_absoluteX="37dp"
+            tools:layout_editor_absoluteY="87dp" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

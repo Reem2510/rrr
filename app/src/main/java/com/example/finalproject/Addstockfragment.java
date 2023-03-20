@@ -29,7 +29,7 @@ import java.util.Map;
  * create an instance of this fragment.
  */
 public class Addstockfragment extends Fragment {
-    private EditText valued,descriptiond,named;
+    private EditText valued,descriptiond,named,Symbol;
     ImageView image;
     private Button Addbt;
     private  FirebaseFirestore db;
@@ -67,17 +67,19 @@ public class Addstockfragment extends Fragment {
         Addbt=getActivity().findViewById(R.id.Addbt);
         valued=getActivity().findViewById(R.id.valued);
         named=getActivity().findViewById(R.id.named);
+        Symbol=getActivity().findViewById(R.id.Symbol);
         descriptiond=getActivity().findViewById(R.id.descriptiond);
          db = FirebaseFirestore.getInstance();
 
     }
 
     private void addtoFireBseStore() {
-        String description,stockname,Value;
+        String description,stockname,Value,Symbold;
         Value=valued.getText().toString();
+        Symbold=Symbol.getText().toString();
         description=descriptiond.getText().toString();
         stockname=named.getText().toString();
-             if (Value.trim().isEmpty()||description.trim().isEmpty()||stockname.trim().isEmpty())
+             if (Value.trim().isEmpty()||description.trim().isEmpty()||stockname.trim().isEmpty()||Symbold.trim().isEmpty())
              {
                  Toast.makeText(getActivity(),"some data are missing",Toast.LENGTH_SHORT).show();
                  return;
@@ -87,6 +89,7 @@ public class Addstockfragment extends Fragment {
                  Map<String, Object> docData = new HashMap<>();
                  docData.put("description", description);
                  docData.put("Value", Arrays.asList(Value));
+                 docData.put("Symbol", Arrays.asList(Symbold));
                  DocumentReference future = db.collection("Stockname").document(stockname);
                  future.set(docData);
                  Toast.makeText(getActivity(),"data added",Toast.LENGTH_SHORT).show();
