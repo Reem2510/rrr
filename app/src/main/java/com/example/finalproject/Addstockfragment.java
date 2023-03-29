@@ -1,10 +1,14 @@
 package com.example.finalproject;
 
+import static android.content.ContentValues.TAG;
+
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +17,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -29,8 +35,8 @@ import java.util.Map;
  * create an instance of this fragment.
  */
 public class Addstockfragment extends Fragment {
-    private EditText valued,descriptiond,named,Symbol;
-    ImageView image;
+    private EditText valued,named,Symbold;
+
     private Button Addbt;
     private  FirebaseFirestore db;
     // TODO: Rename parameter arguments, choose names that match
@@ -67,34 +73,31 @@ public class Addstockfragment extends Fragment {
         Addbt=getActivity().findViewById(R.id.Addbt);
         valued=getActivity().findViewById(R.id.valued);
         named=getActivity().findViewById(R.id.named);
-        Symbol=getActivity().findViewById(R.id.Symbol);
-        descriptiond=getActivity().findViewById(R.id.descriptiond);
+        Symbold=getActivity().findViewById(R.id.Symbold);
          db = FirebaseFirestore.getInstance();
 
     }
 
     private void addtoFireBseStore() {
-        String description,stockname,Value,Symbold;
+        String stockname,Value,Symbol;
         Value=valued.getText().toString();
-        Symbold=Symbol.getText().toString();
-        description=descriptiond.getText().toString();
+        Symbol=Symbold.getText().toString();
         stockname=named.getText().toString();
-             if (Value.trim().isEmpty()||description.trim().isEmpty()||stockname.trim().isEmpty()||Symbold.trim().isEmpty())
+             if (Value.trim().isEmpty()||stockname.trim().isEmpty()||Symbol.trim().isEmpty())
              {
                  Toast.makeText(getActivity(),"some data are missing",Toast.LENGTH_SHORT).show();
                  return;
              }
              else {
-                 Stock s = new Stock(description, stockname, Value);
+                 Stock s = new Stock(Symbol, stockname, Value);
                  Map<String, Object> docData = new HashMap<>();
-                 docData.put("description", description);
+                 docData.put("Symbol", Symbol);
                  docData.put("Value", Arrays.asList(Value));
                  docData.put("Symbol", Arrays.asList(Symbold));
                  DocumentReference future = db.collection("Stockname").document(stockname);
                  future.set(docData);
                  Toast.makeText(getActivity(),"data added",Toast.LENGTH_SHORT).show();
              }
-
     }
 
     @Override

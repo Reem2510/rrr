@@ -18,7 +18,6 @@ import java.util.List;
 
 public class Cadapter extends RecyclerView.Adapter<Cadapter.CurrencyViewholder> {
     private ArrayList<Stock> StocksModals;
-    private List<DocumentSnapshot> mData;
     private Context context;
     private AdapterView.OnItemClickListener mListener;
 
@@ -27,22 +26,6 @@ public class Cadapter extends RecyclerView.Adapter<Cadapter.CurrencyViewholder> 
         this.context = context;
     }
 
-
-    /*public Cadapter(List<DocumentSnapshot> data, AdapterView.OnItemClickListener listener) {
-        mData = data;
-        mListener = listener;
-    } */
-    public void updateData(List<DocumentSnapshot> documents) {
-        mData = documents;
-        notifyDataSetChanged();
-    }
-    /*@Override
-    public void onBindViewHolder( int position) {
-        DocumentSnapshot document = mData.get(position);
-        String name = document.getString("name");
-        String description = document.getString("description");
-
-    } */
 
     public void filterList(ArrayList<Stock> filterlist) {
 

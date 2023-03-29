@@ -52,6 +52,7 @@ public class Signup extends Fragment {
             if(!usernamesign.getText().toString().isEmpty()&&!passwordsign.getText().toString().isEmpty()){
                 if(!Fullname.getText().toString().isEmpty()&&!Phone.getText().toString().isEmpty()&&!Address.getText().toString().isEmpty()) {
                     UserClass u = new UserClass(fullname, userAddress, userPhone);
+
                     db.collection("users")
                             .add(u).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                                 @Override

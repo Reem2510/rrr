@@ -117,7 +117,9 @@ public class Settingsfra extends Fragment {
         searchEdt =getActivity().findViewById(R.id.idEdtCurrency);
         currencyRV =getActivity().findViewById(R.id.idRVSS);
         LinearLayoutManager layoutManager = new LinearLayoutManager(context);
+        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         currencyRV.setLayoutManager(layoutManager);
+        currencyRV.setAdapter(RVAdapter);
         stocksModalArrayList = new ArrayList<>();
         db = FirebaseFirestore.getInstance();
 
@@ -135,7 +137,7 @@ public class Settingsfra extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                //filter(s.toString());
+                filter(s.toString());
             }
         });
 
@@ -151,6 +153,7 @@ public class Settingsfra extends Fragment {
             Toast.makeText(getContext(), "No Stocks found..", Toast.LENGTH_SHORT).show();
         } else {
             // TODO: currencyRVAdapter.filterList(filterlist);
+            //Todo:set adapter after changing the list;
         }
 
         ustock = new StocksCallback() {

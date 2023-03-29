@@ -55,22 +55,9 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <EditText
-                    android:id="@+id/descriptiond"
-                    android:layout_width="275dp"
-                    android:layout_height="48dp"
-                    android:layout_marginEnd="45dp"
-                    android:layout_marginBottom="30dp"
-                    android:background="@drawable/shapebb"
-                    android:ems="10"
-                    android:hint="description"
-                    android:inputType="textPersonName"
-                    android:minHeight="48dp"
-                    app:layout_constraintBottom_toTopOf="@+id/valued"
-                    app:layout_constraintEnd_toEndOf="parent" />
 
                 <EditText
-                    android:id="@+id/Symbol"
+                    android:id="@+id/Symbold"
                     android:layout_width="275dp"
                     android:layout_height="48dp"
                     android:layout_marginEnd="44dp"
