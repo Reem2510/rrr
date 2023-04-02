@@ -113,7 +113,7 @@
                 <Button
                     android:id="@+id/tsignupbtp"
                     android:layout_width="match_parent"
-                    android:layout_height="60dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="30dp"
                     android:backgroundTint="#6B9B6C"
                     android:text="Sign up"
@@ -123,8 +123,8 @@
 
                 <Button
                     android:id="@+id/loginbtp"
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
+                    android:layout_width="350dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:layout_marginBottom="84dp"
                     android:backgroundTint="#F9F9F9"

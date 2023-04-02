@@ -4,40 +4,37 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Settingsfra">
+    tools:context=".Stokstrader">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <EditText
-            android:id="@+id/idEdtCurrency"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:focusable="auto"
-            android:hint="Search Stock"
-            android:textColor="@color/white"
-            android:textColorHint="@color/white"
+
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/simpleSearchView"
+            android:layout_width="401dp"
+            android:layout_height="50dp"
+            android:layout_marginEnd="6dp"
+            android:background="@drawable/shapeb"
+            android:queryHint="Search here....."
+            android:iconifiedByDefault="false"
             app:layout_constraintBottom_toTopOf="@+id/idRVSS"
-            app:layout_constraintEnd_toStartOf="@+id/idRVSS" />
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/idRVSS"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@id/idEdtCurrency"
+            android:layout_width="416dp"
+            android:layout_height="674dp"
+            android:layout_below="@id/simpleSearchView"
+            android:layout_marginBottom="4dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            tools:listitem="@layout/currencyitem" />
+            tools:listitem="@layout/stockitem" />
 
-        <SearchView
-            android:id="@+id/simpleSearchView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:layout_editor_absoluteX="37dp"
-            tools:layout_editor_absoluteY="87dp" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

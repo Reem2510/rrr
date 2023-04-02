@@ -1,7 +1,9 @@
 package com.example.finalproject;
 
-public class Stock {
+public class
+Stock {
     private String StockName,value,Symbol;
+
 
     @Override
     public String toString() {
@@ -14,32 +16,34 @@ public class Stock {
 
 
 
-    public Stock(String symbol, String stockName, String value) {
+    public Stock(String stockName, String symbol, String value) {
         this.StockName = stockName;
-        this.value = value;
         this.Symbol=symbol;
+        this.value = value;
+
+
     }
 
-    public String getSymbol() {
-        return Symbol;
+ public Stock(){}
+    public void setStockName(String stockName) {
+        StockName = stockName;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
     }
 
     public void setSymbol(String symbol) {
         Symbol = symbol;
     }
+
+    public String getSymbol() {
+        return Symbol;
+    }
     public String getStockName() {
         return StockName;
     }
-
-    public void setStockName(String stockName) {
-        StockName = stockName;
-    }
-
     public String getValue() {
         return value;
-    }
-
-    public void setValue(String value) {
-        this.value = value;
     }
 }

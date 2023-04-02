@@ -12,56 +12,57 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class Cadapter extends RecyclerView.Adapter<Cadapter.CurrencyViewholder> {
-    private ArrayList<CurrencyModal> currencyModals;
+public class Sadapter extends RecyclerView.Adapter<Sadapter.CurrencyViewholder> {
+    private ArrayList<Stock> StocksModals;
     private Context context;
     private AdapterView.OnItemClickListener mListener;
 
-    public Cadapter(Context context, ArrayList<CurrencyModal> currencyModals) {
-        this.currencyModals = currencyModals;
+    public Sadapter(Context context, ArrayList<Stock> StocksModals) {
+        this.StocksModals = StocksModals;
         this.context = context;
     }
 
 
-    public void filterList(ArrayList<CurrencyModal> filterlist) {
+    public void filterList(ArrayList<Stock> filterlist) {
 
-        this.currencyModals  = filterlist;
+       this.StocksModals = filterlist;
         notifyDataSetChanged();
     }
-
     @NonNull
     @Override
-    public Cadapter.CurrencyViewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public Sadapter.CurrencyViewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        View view = LayoutInflater.from(context).inflate(R.layout.currencyitem, parent, false);
-        return new Cadapter.CurrencyViewholder(view);
+        View view = LayoutInflater.from(context).inflate(R.layout.stockitem, parent, false);
+        return new Sadapter.CurrencyViewholder(view);
     }
-
     @Override
-    public void onBindViewHolder(@NonNull Cadapter.CurrencyViewholder holder, int position) {
-        CurrencyModal modal = currencyModals.get(position);
-        holder.nameTV.setText(modal.getName());
-        holder.rateTV.setText(modal.getPrice());
+    public void onBindViewHolder(@NonNull Sadapter.CurrencyViewholder holder, int position) {
+       Stock modal = StocksModals.get(position);
+        holder.nameTV.setText(modal.getStockName());
+        holder.rateTV.setText(modal.getValue());
         holder.symbolTV.setText(modal.getSymbol());
     }
 
     @Override
     public int getItemCount() {
 
-        if (currencyModals== null) {
+        if (StocksModals == null) {
             return 0;
         } else {
-            return currencyModals.size();
+            return StocksModals.size();
         }
     }
-
+    public void setData(ArrayList<Stock> newData) {
+        this.StocksModals.clear();
+        this.StocksModals.addAll(newData);
+        notifyDataSetChanged();
+    }
     @Override
     public long getItemId(int position) {
         return position;
     }
-
     public Object getItem(int position) {
-        return currencyModals.get(position);
+        return StocksModals.get(position);
     }
 
     public class CurrencyViewholder extends RecyclerView.ViewHolder {

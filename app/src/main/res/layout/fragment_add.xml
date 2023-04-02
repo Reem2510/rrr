@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/FrameLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/data"
+    tools:context=".AddFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/buttoncc"
+            android:layout_width="142dp"
+            android:layout_height="86dp"
+            android:layout_marginStart="80dp"
+            android:layout_marginBottom="134dp"
+            android:background="@drawable/shape"
+            android:backgroundTint="@color/white"
+
+            android:text="ADD currency"
+            app:layout_constraintBottom_toTopOf="@+id/buttonss"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/buttonss"
+            android:layout_width="142dp"
+            android:layout_height="86dp"
+            android:layout_marginEnd="76dp"
+            android:layout_marginBottom="156dp"
+            android:background="@drawable/shape"
+            android:backgroundTint="@color/white"
+            android:text="Add Stocks"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</FrameLayout>

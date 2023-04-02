@@ -1,7 +1,5 @@
 package com.example.finalproject;
 
-import static android.content.ContentValues.TAG;
-
 import android.content.Context;
 import android.os.Bundle;
 
@@ -10,56 +8,37 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.Toast;
+import androidx.appcompat.widget.SearchView;
 
-import com.google.android.gms.common.api.Response;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.FirebaseApp;
-import com.google.firebase.FirebaseOptions;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.google.firebase.firestore.auth.User;
-import com.google.firebase.firestore.core.FirestoreClient;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.FileInputStream;
-import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
-import io.grpc.okhttp.internal.proxy.Request;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link Settingsfra#newInstance} factory method to
+ * Use the {@link Stokstrader#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Settingsfra extends Fragment {
+public class Stokstrader extends Fragment {
     private RecyclerView currencyRV;
     private EditText searchEdt;
     private ArrayList<Stock> stocksModalArrayList;
-    private Cadapter RVAdapter;
+    private Sadapter RVAdapter;
 
-    private StocksCallback ustock;
+
     private Context context;
+    private SearchView searchView;
 
   private FirebaseFirestore db ;
   private   CollectionReference stocksRef;
@@ -75,7 +54,7 @@ public class Settingsfra extends Fragment {
     private String mParam2;
 
 
-    public Settingsfra() {
+    public Stokstrader() {
 
     }
 
@@ -88,8 +67,8 @@ public class Settingsfra extends Fragment {
      * @return A new instance of fragment Settingsfra.
      */
     // TODO: Rename and change types and number of parameters
-    public static Settingsfra newInstance(String param1, String param2) {
-        Settingsfra fragment = new Settingsfra();
+    public static Stokstrader newInstance(String param1, String param2) {
+        Stokstrader fragment = new Stokstrader();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -107,41 +86,35 @@ public class Settingsfra extends Fragment {
         }
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        attachComponents();
-    }
+
 
     private void attachComponents() {
-        searchEdt =getActivity().findViewById(R.id.idEdtCurrency);
         currencyRV =getActivity().findViewById(R.id.idRVSS);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(context);
-        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        currencyRV.setLayoutManager(layoutManager);
-        currencyRV.setAdapter(RVAdapter);
         stocksModalArrayList = new ArrayList<>();
+        RVAdapter = new Sadapter(getActivity(),stocksModalArrayList);
+        currencyRV.setAdapter(RVAdapter);
+        RVAdapter.notifyDataSetChanged();
+        LinearLayoutManager manager = new LinearLayoutManager(getActivity());
+        currencyRV.setLayoutManager(manager);
         db = FirebaseFirestore.getInstance();
-
         getData();
-        searchEdt.addTextChangedListener(new TextWatcher() {
+        searchView=getActivity().findViewById(R.id.simpleSearchView);
+        searchView.clearFocus();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
+            public boolean onQueryTextSubmit(String query) {
+                return false;
             }
 
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                filter(s.toString());
+            public boolean onQueryTextChange(String newText) {
+                filter(newText);
+                return true;
             }
         });
 
     }
+
     private void filter(String filter) {
         ArrayList<Stock> filterlist = new ArrayList<>();
         for (Stock item : stocksModalArrayList) {
@@ -154,40 +127,38 @@ public class Settingsfra extends Fragment {
         } else {
             // TODO: currencyRVAdapter.filterList(filterlist);
             //Todo:set adapter after changing the list;
+            RVAdapter.filterList(filterlist);
         }
 
-        ustock = new StocksCallback() {
-            @Override
-            public void onCallback(ArrayList<Stock> stocksList) {
-                Cadapter ca = new Cadapter(getContext(), stocksList);
-                currencyRV.setAdapter(ca);
-            }
-
-        };
     }
 
     private void getData() {
-
         stocksModalArrayList.clear();
-        db.collection("stocks")
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        db.collection("stockkkk").get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                Stock stock = document.toObject(Stock.class);
-                                stocksModalArrayList.add(stock);
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        if (!queryDocumentSnapshots.isEmpty()) {
+                            List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
+                            for (DocumentSnapshot d : list) {
+                                Stock s = d.toObject(Stock.class);
+                                stocksModalArrayList.add(s);
+                                RVAdapter.setData(stocksModalArrayList);
+                            }
+                            if (RVAdapter != null && !stocksModalArrayList.isEmpty()) {
+                                RVAdapter.notifyDataSetChanged();
                             }
 
-                            ustock.onCallback(stocksModalArrayList);
                         } else {
-                            //Log.e("AllRestActivity: readData()", "Error getting documents.", task.getException());
+                            Toast.makeText(getContext(), "No data found in Database", Toast.LENGTH_SHORT).show();
                         }
                     }
-
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(getContext(), "Fail to get the data.", Toast.LENGTH_SHORT).show();
+                    }
                 });
-
 
 
     }
@@ -196,9 +167,13 @@ public class Settingsfra extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_settingsfra, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_settingsfra, container, false);
+        if (currencyRV != null) {
+           attachComponents();
+            getData();
+        }
+        return rootView;
     }
-
 
 
    }

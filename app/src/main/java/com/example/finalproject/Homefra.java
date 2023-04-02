@@ -8,17 +8,22 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.ProgressBar;
-
-import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link Mainfra#newInstance} factory method to
+ * Use the {@link Homefra#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Mainfra extends Fragment {
+public class Homefra extends Fragment {
+    private static  String API_KEY="4b73cb7c4dcd4968bd2a70f6eb96a758";
+    private static String TAG="MainActivity";
+
+    private ProgressBar mProgressBar;
+    private RecyclerView mRecyclerView;
+
+    
+
 
 
     // TODO: Rename parameter arguments, choose names that match
@@ -30,7 +35,7 @@ public class Mainfra extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public Mainfra() {
+    public Homefra() {
         // Required empty public constructor
     }
 
@@ -43,8 +48,8 @@ public class Mainfra extends Fragment {
      * @return A new instance of fragment Mainfra.
      */
     // TODO: Rename and change types and number of parameters
-    public static Mainfra newInstance(String param1, String param2) {
-        Mainfra fragment = new Mainfra();
+    public static Homefra newInstance(String param1, String param2) {
+        Homefra fragment = new Homefra();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -60,7 +65,14 @@ public class Mainfra extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
+    private void attachComponents(){
 
+        get_news_from_api();
+    }
+
+    public void get_news_from_api(){
+
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
