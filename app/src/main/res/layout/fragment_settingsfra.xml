@@ -4,38 +4,40 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Stokstrader">
+    tools:context=".Fragments.Stokstrader">
 
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
 
-        <androidx.appcompat.widget.SearchView
-            android:id="@+id/simpleSearchView"
-            android:layout_width="401dp"
-            android:layout_height="50dp"
-            android:layout_marginEnd="6dp"
-            android:background="@drawable/shapeb"
-            android:queryHint="Search here....."
-            android:iconifiedByDefault="false"
-            app:layout_constraintBottom_toTopOf="@+id/idRVSS"
-            app:layout_constraintEnd_toEndOf="parent" />
+            <androidx.appcompat.widget.SearchView
+                android:id="@+id/simpleSearchView"
+                android:layout_width="401dp"
+                android:layout_height="50dp"
+                android:layout_marginEnd="6dp"
+                android:background="@drawable/shapeb"
+                android:iconifiedByDefault="false"
+                android:queryHint="Search here.....">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/idRVSS"
-            android:layout_width="416dp"
-            android:layout_height="674dp"
-            android:layout_below="@id/simpleSearchView"
-            android:layout_marginBottom="4dp"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            tools:listitem="@layout/stockitem" />
+            </androidx.appcompat.widget.SearchView>
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/idRVSS"
+                android:layout_width="416dp"
+                android:layout_height="674dp"
+                android:layout_below="@id/simpleSearchView"
+                android:layout_marginBottom="4dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/stockitem" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+    </ScrollView>
 
 
 </FrameLayout>

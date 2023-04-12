@@ -2,12 +2,42 @@
     <string name="app_name">finalproject</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string-array name="currency_array">
-        <item>USD</item>
-        <item>EUR</item>
-        <item>JPY</item>
+    <string-array name="channels_array">
+        <item>Trading 212 </item>
+        <item>tastytrade</item>
+        <item>Investopedia</item>
+        <item>ForexSignals TV</item>
+        <item>Stock Market Live</item>
+        <item>UKspreadbetting</item>
+        <item>Rayner Teo</item>
+    </string-array>
+
+    <string-array name="Books_array">
+        <item>Reminiscences of a Stock Operator</item>
+        <item>The Intelligent Investor</item>
+        <item>Market Wizards</item>
+        <item>The Disciplined Trader</item>
+        <item>Trader Vic II: Principles of Professional Speculation</item>
+    </string-array>
+    <string-array name="Books_arrayDD">
+        <item>Reminiscences of a Stock Operator</item>
+        <item>The Intelligent Investor</item>
+        <item>Market Wizards</item>
+        <item>The Disciplined Trader</item>
+        <item>Trader Vic II: Principles of Professional Speculation</item>
+        <item>Trader Vic II: Principles of Professional Speculation</item>
 
     </string-array>
+    <string-array name="Podcast_array">
+        <item>We Study Billionaires </item>
+        <item> Motley Fool Money</item>
+        <item>BiggerPockets</item>
+        <item>The Acquirer’s Podcast</item>
+        <item>TOP TRADERS UNPLUGGED</item>
+        <item> Option Alpha Podcast</item>
+        <item> MARKET FOOLERY</item>
+    </string-array>
+
     <string name="title_activity_web">WebActivity</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
@@ -17,4 +47,5 @@
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="title_activity_show_more_acticity">ShowMoreActicity</string>
 </resources>
