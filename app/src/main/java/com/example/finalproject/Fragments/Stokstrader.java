@@ -148,11 +148,8 @@ public class Stokstrader extends Fragment {
                             RVAdapter = new Sadapter(getActivity(),stocksModalArrayList);
                             currencyRV.setAdapter(RVAdapter);
                             RVAdapter.notifyDataSetChanged();
-                         /*   RVAdapter.setData(stocksModalArrayList);
-                            if (RVAdapter != null && !stocksModalArrayList.isEmpty()) {
-                                RVAdapter.notifyDataSetChanged();
-                            }
-*/
+
+
                         } else {
                             Toast.makeText(getContext(), "No data found in Database", Toast.LENGTH_SHORT).show();
                         }

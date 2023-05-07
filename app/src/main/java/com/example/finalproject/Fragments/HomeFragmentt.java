@@ -1,6 +1,7 @@
 package com.example.finalproject.Fragments;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -10,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.example.finalproject.Activites.ShowMoreActivity;
 import com.example.finalproject.Adapters.BPAdapter;
@@ -111,7 +113,7 @@ private  int[]BBImages={R.drawable.b1,R.drawable.b2,R.drawable.b3,R.drawable.b4,
         }
     }
     private void SetDataModalsCC(){
-        String[] descc=getResources().getStringArray(R.array.Books_arrayDD);
+        String[] descc=getResources().getStringArray(R.array.Books_array);
         for (int  i=0;i < CCImages.length;i++)
         {
             itemDatacc.add(new CCClass(CCImages[i],descc[i]));
@@ -127,14 +129,8 @@ private  int[]BBImages={R.drawable.b1,R.drawable.b2,R.drawable.b3,R.drawable.b4,
 
     @Override
     public void onItemClick(int position) {
-
         Intent intent=new Intent(getActivity(), ShowMoreActivity.class);
-
-        intent.putExtra("imageyy",itemDatacc.get(position).getImageurl());
         intent.putExtra("des",itemDatacc.get(position).getDes());
-
-        //  intent.putExtra("booksname",itemDataBB.get(position).getName());
-     //  intent.putExtra("booksds",itemDataBB.get(position).getDes());
        startActivity(intent);
     }
 

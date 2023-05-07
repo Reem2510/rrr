@@ -13,7 +13,7 @@
 
         <ImageView
             android:id="@+id/ccimageView"
-            android:layout_width="375dp"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
             app:srcCompat="@drawable/c1" />

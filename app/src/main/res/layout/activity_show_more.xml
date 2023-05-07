@@ -1,40 +1,80 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-tools:context=".Activites.ShowMoreActivity">
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    tools:context=".Activites.ShowMoreActivity"
+    >
 
-        <ImageView
-            android:id="@+id/mainimg"
-            android:layout_width="455dp"
-            android:layout_height="244dp"
-            android:layout_marginTop="8dp"
-            android:scaleType="centerCrop"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/t1" />
+    <TextView
+        android:id="@+id/des_tv2"
+        android:layout_width="384dp"
+        android:layout_height="391dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="61dp"
+        android:layout_marginEnd="16dp"
+        android:lineSpacingExtra="10sp"
+        android:padding="10dp"
+        android:text="
+Ideal as a first step into the world of trading, this course takes you on a tour of the financial markets – including shares, indices, forex and commodities – equipping you with the essentials every trader needs to know.
 
-        <TextView
-            android:id="@+id/des_tv2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:lineSpacingExtra="10sp"
-            android:padding="10dp"
-            android:text="sdffssdfd"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+You’ll discover how each market operates, what drives it, and most importantly how you might capitalise on its movements.
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+But before that, we’ll answer the most fundamental question of all: what is financial trading, and why would you want to do it?
 
-</ScrollView>
+"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nameView2" />
+
+    <TextView
+        android:id="@+id/nameView2"
+        android:layout_width="183dp"
+        android:layout_height="45dp"
+        android:layout_marginEnd="128dp"
+        android:layout_marginBottom="28dp"
+        android:lineSpacingExtra="10sp"
+        android:padding="10dp"
+        android:text="Course overview"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textColor="@color/green"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toTopOf="@+id/des_tv2"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/buttonba"
+        android:layout_width="100dp"
+        android:layout_height="53dp"
+        android:layout_marginEnd="18dp"
+        android:layout_marginBottom="25dp"
+        android:backgroundTint="@color/white"
+        android:text="Back"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/urlbt"
+        android:layout_width="209dp"
+        android:layout_height="52dp"
+        android:layout_marginEnd="118dp"
+        android:layout_marginBottom="175dp"
+        android:text="get started"
+        android:textColor="@color/green"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="306dp"
+        android:layout_marginBottom="6dp"
+        android:text="DESCRIPTION"
+        app:layout_constraintBottom_toTopOf="@+id/des_tv2"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
